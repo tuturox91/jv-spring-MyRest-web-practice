@@ -18,29 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/cinema-halls")
 public class CinemaHallController {
     private final CinemaHallService cinemaHallService;
-    private final DtoRequestMapper<CinemaHallRequestDto, CinemaHall> dtoRequestMapper;
-    private final DtoResponseMapper<CinemaHallResponseDto, CinemaHall> dtoResponseMapper;
+    private final DtoRequestMapper<CinemaHallRequestDto, CinemaHall> cinemaHallDtoRequestMapper;
+    private final DtoResponseMapper<CinemaHallResponseDto, CinemaHall> cinemaHallDtoResponseMapper;
 
     public CinemaHallController(CinemaHallService cinemaHallService,
                                 DtoRequestMapper<CinemaHallRequestDto, CinemaHall>
-                                        dtoRequestMapper,
+                                        cinemaHallDtoRequestMapper,
                                 DtoResponseMapper<CinemaHallResponseDto, CinemaHall>
-                                        dtoResponseMapper) {
+                                        cinemaHallDtoResponseMapper) {
         this.cinemaHallService = cinemaHallService;
-        this.dtoRequestMapper = dtoRequestMapper;
-        this.dtoResponseMapper = dtoResponseMapper;
+        this.cinemaHallDtoRequestMapper = cinemaHallDtoRequestMapper;
+        this.cinemaHallDtoResponseMapper = cinemaHallDtoResponseMapper;
     }
 
     @PostMapping
     public CinemaHallResponseDto addCinemaHall(@RequestBody CinemaHallRequestDto dto) {
-        CinemaHall cinemaHall = cinemaHallService.add(dtoRequestMapper.fromDto(dto));
-        return dtoResponseMapper.toDto(cinemaHall);
+        CinemaHall cinemaHall = cinemaHallService.add(cinemaHallDtoRequestMapper.fromDto(dto));
+        return cinemaHallDtoResponseMapper.toDto(cinemaHall);
     }
 
     @GetMapping
     public List<CinemaHallResponseDto> getAllCinemaHalls() {
         return cinemaHallService.getAll().stream()
-                .map(dtoResponseMapper::toDto)
+                .map(cinemaHallDtoResponseMapper::toDto)
                 .collect(Collectors.toList());
     }
 }

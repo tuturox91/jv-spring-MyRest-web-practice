@@ -12,21 +12,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private final ShoppingCartDao shoppingCartDao;
     private final TicketDao ticketDao;
+    private final ShoppingCartDao shoppingCartDao;
 
-    public ShoppingCartServiceImpl(ShoppingCartDao shoppingCartDao, TicketDao ticketDao) {
-        this.shoppingCartDao = shoppingCartDao;
+    public ShoppingCartServiceImpl(TicketDao ticketDao,
+                                   ShoppingCartDao shoppingCartDao) {
         this.ticketDao = ticketDao;
+        this.shoppingCartDao = shoppingCartDao;
     }
 
     @Override
     public void addSession(MovieSession movieSession, User user) {
         Ticket newTicket = new Ticket();
         newTicket.setUser(user);
-        newTicket.setCinemaHall(movieSession.getCinemaHall());
-        newTicket.setShowTime(movieSession.getShowTime());
-        newTicket.setMovie(movieSession.getMovie());
+        newTicket.setMovieSession(movieSession);
 
         ShoppingCart shoppingCart = shoppingCartDao.getByUser(user);
         shoppingCart.getTickets().add(ticketDao.add(newTicket));
