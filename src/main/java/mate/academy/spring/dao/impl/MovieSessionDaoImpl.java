@@ -52,8 +52,8 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
         try (Session session = sessionFactory.openSession()) {
             Query<MovieSession> query = session.createQuery(
                     "FROM MovieSession ms "
-                            + "LEFT JOIN FETCH ms.movie "
-                            + "LEFT JOIN FETCH ms.cinemaHall "
+                            + "JOIN FETCH ms.movie "
+                            + "JOIN FETCH ms.cinemaHall "
                             + "WHERE ms.id = :id", MovieSession.class);
             query.setParameter("id", id);
             return query.uniqueResultOptional();
