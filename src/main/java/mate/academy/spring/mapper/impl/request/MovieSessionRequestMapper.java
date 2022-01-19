@@ -1,4 +1,4 @@
-package mate.academy.spring.service.dto.mapping.impl.request;
+package mate.academy.spring.mapper.impl.request;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ import mate.academy.spring.model.MovieSession;
 import mate.academy.spring.model.dto.request.MovieSessionRequestDto;
 import mate.academy.spring.service.CinemaHallService;
 import mate.academy.spring.service.MovieService;
-import mate.academy.spring.service.dto.mapping.DtoRequestMapper;
+import mate.academy.spring.mapper.DtoRequestMapper;
 import org.springframework.stereotype.Component;
 
 @Component
